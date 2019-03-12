@@ -1,4 +1,4 @@
-require 'rails-helper'
+require 'rails_helper'
 
 describe "Items API" do
   it "sends a list of items" do
@@ -8,4 +8,4 @@ describe "Items API" do
 
     expect(response).to be_successful
   end
-end 
+end
