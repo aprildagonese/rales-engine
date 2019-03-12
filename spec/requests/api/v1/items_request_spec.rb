@@ -22,7 +22,6 @@ describe "Items API" do
     expect(response).to be_successful
     items = JSON.parse(response.body)
     expect(items["id"]).to eq(item.id)
-
     # expect(items.count).to eq(1)
   end
 end
