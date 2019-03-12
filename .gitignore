@@ -21,3 +21,11 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Ignore csv files
+lib/csv/customers.csv
+lib/csv/transactions.csv
+lib/csv/invoices.csv
+lib/csv/invoice_items.csv
+lib/csv/merchants.csv
+lib/csv/items.csv
