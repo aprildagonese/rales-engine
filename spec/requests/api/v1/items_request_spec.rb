@@ -24,7 +24,7 @@ RSpec.describe "Items API" do
       items = JSON.parse(response.body)
 
       expect(items["data"]["id"]).to eq(item.id.to_s)
-      expect(items.count).to eq(1)
+      expect(items["data"].count).to eq(1)
     end
   end
 
@@ -98,6 +98,46 @@ RSpec.describe "Items API" do
       expect(response).to be_successful
       date = JSON.parse(response.body)
       expect(date["data"]["attributes"]["created_at"]).to eq("2019-03-07T21:29:54.643Z")
+    end
+  end
+
+  describe 'Finders' do
+    before :each do
+      @merch1, @merch2, @merch3 = create_list(:merchant, 3)
+      @item1 = create(:item, merchant: @merch1, created_at: "2019-03-06T21:29:54.643Z", updated_at: "2019-03-08T21:29:54.643Z")
+      @item2 = create(:item, merchant: @merch2, created_at: "2019-03-02T21:29:54.643Z", updated_at: "2019-03-08T21:29:54.643Z")
+      @item7 = create(:item, merchant: @merch1, name: "TestItem")
+      @item8 = create(:item, merchant: @merch2, name: "IAmItem")
+    end
+
+    it "can find a single object based on parameters" do
+      # get "/api/v1/items/find?id=#{@item7.id}"
+      # expect(response).to be_successful
+      # item = JSON.parse(response.body)
+      # expect(item["data"].count).to eq(1)
+      # expect(item["data"]["attributes"]["id"]).to eq(@item7.id.to_s)
+
+      get "/api/v1/items/find?name=#{@item8.name}"
+      expect(response).to be_successful
+      item = JSON.parse(response.body)
+      expect(item["data"].count).to eq(1)
+      expect(item["data"]["attributes"]["name"]).to eq(@item8.name)
+
+      get "/api/v1/items/find?created_at=#{@item1.created_at}"
+      expect(response).to be_successful
+      item = JSON.parse(response.body)
+      expect(item["data"].count).to eq(1)
+      expect(item["data"]["attributes"]["created_at"]).to eq(@item1.created_at)
+
+      get "/api/v1/items/find?updated_at=#{@item2.updated_at}"
+      expect(response).to be_successful
+      item = JSON.parse(response.body)
+      expect(item["data"].count).to eq(1)
+      expect(item["data"]["attributes"]["id"]).to eq(@item2.updated_at)
+
+    end
+
+    it "can find_all objects based on parameters" do
     end
   end
 end
