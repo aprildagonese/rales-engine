@@ -40,8 +40,18 @@ describe "Items API" do
 
     get '/api/v1/items/most_items?quantity=1'
     expect(response).to be_successful
-    item = JSON.parse(response.body)
-    expect(item[:id]).to eq(@item4.id)
+    items = JSON.parse(response.body)
+    expect(items.count).to eq(1)
+    expect(items.first["id"]).to eq(@item4.id)
+
+    get '/api/v1/items/most_items?quantity=4'
+    expect(response).to be_successful
+    items = JSON.parse(response.body)
+    expect(items.count).to eq(4)
+    expect(items[0]["id"]).to eq(@item4.id)
+    expect(items[1]["id"]).to eq(@item2.id)
+    expect(items[2]["id"]).to eq(@item3.id)
+    expect(items[3]["id"]).to eq(@item5.id)
   end
 
   xit "returns X items ranked by revenue" do

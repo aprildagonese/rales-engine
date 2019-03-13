@@ -4,6 +4,11 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def show
-    render json: Item.find(params[:id])
+    if params[:id] == "most_items"
+      @items = Item.most_items(params[:quantity])
+      render json: @items
+    else
+      render json: Item.find(params[:id])
+    end
   end
 end
