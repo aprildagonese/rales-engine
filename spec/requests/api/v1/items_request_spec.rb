@@ -75,5 +75,28 @@ RSpec.describe "Items API" do
       expect(items[3]["id"]).to eq(@item5.id)
       expect(items[4]["id"]).to eq(@item1.id)
     end
+
+    it "returns day of most sales for given item" do
+      @item7 = create(:item, merchant: @merch1)
+      @item8 = create(:item, merchant: @merch2)
+      @invoice3, @invoice4, @invoice5 = create_list(:invoice, 3, merchant: @merch1, customer: @customer)
+      @invoice6, @invoice7, @invoice8 = create_list(:invoice, 3, merchant: @merch1, customer: @customer)
+      @inv_item6 = create(:invoice_item, invoice: @invoice3, item: @item7, quantity: 5, created_at: "2019-03-06T21:29:54.643Z")
+      @inv_item7 = create(:invoice_item, invoice: @invoice4, item: @item7, quantity: 1, created_at: "2019-03-08T21:29:54.643Z")
+      @inv_item8 = create(:invoice_item, invoice: @invoice5, item: @item7, quantity: 1, created_at: "2019-03-09T21:29:54.643Z")
+      @inv_item9 = create(:invoice_item, invoice: @invoice6, item: @item8, quantity: 1, created_at: "2019-03-07T21:29:54.643Z")
+      @inv_item10 = create(:invoice_item, invoice: @invoice7, item: @item8, quantity: 1, created_at: "2019-03-07T21:29:54.643Z")
+      @inv_item11 = create(:invoice_item, invoice: @invoice8, item: @item8, quantity: 1, created_at: "2019-03-08T21:29:54.643Z")
+
+      get "/api/v1/items/#{@item7.id}/best_day"
+      expect(response).to be_successful
+      date = JSON.parse(response.body)
+      expect(date["created_at"]).to eq("2019-03-06T21:29:54.643Z")
+
+      get "/api/v1/items/#{@item8.id}/best_day"
+      expect(response).to be_successful
+      date = JSON.parse(response.body)
+      expect(date["created_at"]).to eq("2019-03-07T21:29:54.643Z")
+    end
   end
 end

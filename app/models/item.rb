@@ -21,4 +21,12 @@ class Item < ApplicationRecord
         .limit(limit)
   end
 
+  def best_day
+    self.invoice_items
+        .select("invoice_items.created_at, sum(invoice_items.quantity) AS most_sold")
+        .group("invoice_items.created_at")
+        .order("most_sold DESC")
+        .limit(1)
+  end
+
 end
