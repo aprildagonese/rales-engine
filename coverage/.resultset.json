@@ -69,6 +69,12 @@
         1,
         null
       ],
+      "/Users/aprildagonese/Turing/3module/projects/rales_engine/app/serializers/item_serializer.rb": [
+        1,
+        1,
+        1,
+        null
+      ],
       "/Users/aprildagonese/Turing/3module/projects/rales_engine/app/models/customer.rb": [
         1,
         1,
@@ -107,6 +113,12 @@
         null,
         null
       ],
+      "/Users/aprildagonese/Turing/3module/projects/rales_engine/app/serializers/item_date_serializer.rb": [
+        1,
+        1,
+        1,
+        null
+      ],
       "/Users/aprildagonese/Turing/3module/projects/rales_engine/app/mailers/application_mailer.rb": [
         0,
         0,
@@ -135,6 +147,6 @@
         0
       ]
     },
-    "timestamp": 1552513315
+    "timestamp": 1552515613
   }
 }

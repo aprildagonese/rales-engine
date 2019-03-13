@@ -11,7 +11,7 @@ RSpec.describe "Items API" do
 
       items = JSON.parse(response.body)
 
-      expect(items.count).to eq(3)
+      expect(items["data"].count).to eq(3)
     end
 
     it "sends a single item" do
@@ -22,8 +22,9 @@ RSpec.describe "Items API" do
 
       expect(response).to be_successful
       items = JSON.parse(response.body)
-      expect(items["id"]).to eq(item.id)
-      # expect(items.count).to eq(1)
+
+      expect(items["data"]["id"]).to eq(item.id.to_s)
+      expect(items.count).to eq(1)
     end
   end
 
@@ -47,19 +48,19 @@ RSpec.describe "Items API" do
       get '/api/v1/items/most_items?quantity=1'
       expect(response).to be_successful
       items = JSON.parse(response.body)
-      expect(items.count).to eq(1)
-      expect(items.first["id"]).to eq(@item4.id)
+      expect(items["data"].count).to eq(1)
+      expect(items["data"].first["id"]).to eq(@item4.id.to_s)
 
       get '/api/v1/items/most_items?quantity=4'
       expect(response).to be_successful
 
       items = JSON.parse(response.body)
 
-      expect(items.count).to eq(4)
-      expect(items[0]["id"]).to eq(@item4.id)
-      expect(items[1]["id"]).to eq(@item2.id)
-      expect(items[2]["id"]).to eq(@item3.id)
-      expect(items[3]["id"]).to eq(@item5.id)
+      expect(items["data"].count).to eq(4)
+      expect(items["data"][0]["id"]).to eq(@item4.id.to_s)
+      expect(items["data"][1]["id"]).to eq(@item2.id.to_s)
+      expect(items["data"][2]["id"]).to eq(@item3.id.to_s)
+      expect(items["data"][3]["id"]).to eq(@item5.id.to_s)
     end
 
     it "returns X items ranked by revenue" do
@@ -68,12 +69,12 @@ RSpec.describe "Items API" do
 
       items = JSON.parse(response.body)
 
-      expect(items.count).to eq(5)
-      expect(items[0]["id"]).to eq(@item4.id)
-      expect(items[1]["id"]).to eq(@item2.id)
-      expect(items[2]["id"]).to eq(@item3.id)
-      expect(items[3]["id"]).to eq(@item5.id)
-      expect(items[4]["id"]).to eq(@item1.id)
+      expect(items["data"].count).to eq(5)
+      expect(items["data"][0]["id"]).to eq(@item4.id.to_s)
+      expect(items["data"][1]["id"]).to eq(@item2.id.to_s)
+      expect(items["data"][2]["id"]).to eq(@item3.id.to_s)
+      expect(items["data"][3]["id"]).to eq(@item5.id.to_s)
+      expect(items["data"][4]["id"]).to eq(@item1.id.to_s)
     end
 
     it "returns day of most sales for given item" do
@@ -91,12 +92,12 @@ RSpec.describe "Items API" do
       get "/api/v1/items/#{@item7.id}/best_day"
       expect(response).to be_successful
       date = JSON.parse(response.body)
-      expect(date["created_at"]).to eq("2019-03-06T21:29:54.643Z")
+      expect(date["data"]["attributes"]["created_at"]).to eq("2019-03-06T21:29:54.643Z")
 
       get "/api/v1/items/#{@item8.id}/best_day"
       expect(response).to be_successful
       date = JSON.parse(response.body)
-      expect(date["created_at"]).to eq("2019-03-07T21:29:54.643Z")
+      expect(date["data"]["attributes"]["created_at"]).to eq("2019-03-07T21:29:54.643Z")
     end
   end
 end

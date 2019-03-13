@@ -36,6 +36,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'database_cleaner'
   gem 'simplecov'
+  gem 'fast_jsonapi'
 end
 
 group :development do
