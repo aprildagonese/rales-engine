@@ -18,6 +18,14 @@ Rails.application.routes.draw do
       get 'customers/:id/favorite_merchant', to: 'customer_merchants#index', as: :customer_merchants
       get 'customers', to: 'customers#index', as: :customers
       get 'customers/:id', to: 'customers#show', as: :customer
+
+      get 'merchants/find_all', to: 'merchants_find#index', as: :find_merchants
+      get 'merchants/find', to: 'merchants_find#show', as: :find_merchant
+      get 'merchants/:id/items', to: 'merchant_items#index', as: :merchant_items
+      get 'merchants/:id/invoices', to: 'merchant_invoices#index', as: :merchant_invoices
+      get 'merchants', to: 'merchants#index', as: :merchants
+      get 'merchants/:id', to: 'merchants#show', as: :merchant
+
     end
   end
 end

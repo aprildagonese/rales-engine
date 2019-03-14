@@ -32,7 +32,6 @@ RSpec.describe "Customers API" do
   end
 
   describe "Finders" do
-
     it "can find a single object based on parameters" do
       @customer1 = create(:customer, created_at: "2019-03-06 21:29:54 UTC", updated_at: "2019-03-08 21:29:54 UTC")
       @customer2 = create(:customer, created_at: "2019-03-02 21:29:54 UTC", updated_at: "2019-03-07 21:29:54 UTC")
