@@ -48,16 +48,42 @@
       ],
       "/Users/aprildagonese/Turing/3module/projects/rales_engine/app/controllers/api/v1/item_find_controller.rb": [
         1,
+        null,
         1,
+        4,
+        1,
+        3,
+        1,
+        2,
+        1,
+        1,
+        1,
+        null,
+        4,
         null,
         null,
         1,
-        1,
-        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        null,
         null,
         null
       ],
       "/Users/aprildagonese/Turing/3module/projects/rales_engine/app/controllers/application_controller.rb": [
+        1,
+        null
+      ],
+      "/Users/aprildagonese/Turing/3module/projects/rales_engine/app/serializers/item_serializer.rb": [
+        1,
+        1,
         1,
         null
       ],
@@ -97,12 +123,6 @@
         0
       ],
       "/Users/aprildagonese/Turing/3module/projects/rales_engine/app/models/transaction.rb": [
-        0,
-        0,
-        0
-      ],
-      "/Users/aprildagonese/Turing/3module/projects/rales_engine/app/serializers/item_serializer.rb": [
-        0,
         0,
         0,
         0
@@ -158,6 +178,6 @@
         0
       ]
     },
-    "timestamp": 1552518618
+    "timestamp": 1552580372
   }
 }

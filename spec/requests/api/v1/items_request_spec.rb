@@ -102,42 +102,70 @@ RSpec.describe "Items API" do
   end
 
   describe 'Finders' do
-    before :each do
-      @merch1, @merch2, @merch3 = create_list(:merchant, 3)
-      @item1 = create(:item, merchant: @merch1, created_at: "2019-03-06T21:29:54.643Z", updated_at: "2019-03-08T21:29:54.643Z")
-      @item2 = create(:item, merchant: @merch2, created_at: "2019-03-02T21:29:54.643Z", updated_at: "2019-03-08T21:29:54.643Z")
-      @item7 = create(:item, merchant: @merch1, name: "TestItem")
-      @item8 = create(:item, merchant: @merch2, name: "IAmItem")
-    end
 
     it "can find a single object based on parameters" do
-      # get "/api/v1/items/find?id=#{@item7.id}"
-      # expect(response).to be_successful
-      # item = JSON.parse(response.body)
-      # expect(item["data"].count).to eq(1)
-      # expect(item["data"]["attributes"]["id"]).to eq(@item7.id.to_s)
+      @merch1, @merch2, @merch3 = create_list(:merchant, 3)
+      @item1 = create(:item, merchant: @merch1, created_at: "2019-03-06 21:29:54 UTC", updated_at: "2019-03-08 21:29:54 UTC")
+      @item2 = create(:item, merchant: @merch2, created_at: "2019-03-02 21:29:54 UTC", updated_at: "2019-03-07 21:29:54 UTC")
+      @item3 = create(:item, merchant: @merch1, name: "TestItem")
+      @item4 = create(:item, merchant: @merch2, name: "IAmItem")
 
-      get "/api/v1/items/find?name=#{@item8.name}"
+      get "/api/v1/items/find?id=#{@item3.id}"
       expect(response).to be_successful
       item = JSON.parse(response.body)
-      expect(item["data"].count).to eq(1)
-      expect(item["data"]["attributes"]["name"]).to eq(@item8.name)
+      expect(item["data"]["attributes"]["id"]).to eq(@item3.id)
+
+      get "/api/v1/items/find?name=#{@item4.name}"
+      expect(response).to be_successful
+      item = JSON.parse(response.body)
+      expect(item["data"]["attributes"]["id"]).to eq(@item4.id)
 
       get "/api/v1/items/find?created_at=#{@item1.created_at}"
       expect(response).to be_successful
       item = JSON.parse(response.body)
-      expect(item["data"].count).to eq(1)
-      expect(item["data"]["attributes"]["created_at"]).to eq(@item1.created_at)
+      expect(item["data"]["attributes"]["id"]).to eq(@item1.id)
 
       get "/api/v1/items/find?updated_at=#{@item2.updated_at}"
       expect(response).to be_successful
       item = JSON.parse(response.body)
-      expect(item["data"].count).to eq(1)
-      expect(item["data"]["attributes"]["id"]).to eq(@item2.updated_at)
-
+      expect(item["data"]["attributes"]["id"]).to eq(@item2.id)
     end
 
-    it "can find_all objects based on parameters" do
+    it "can find_all objects based on case-insensitive parameters" do
+      @merch1, @merch2, @merch3 = create_list(:merchant, 3)
+      @item1 = create(:item, merchant: @merch1, created_at: "2019-03-06 21:29:54 UTC", updated_at: "2019-03-08 21:29:54 UTC")
+      @item2 = create(:item, merchant: @merch2, created_at: "2019-03-02 21:29:54 UTC", updated_at: "2019-03-08 21:29:54 UTC")
+      @item3 = create(:item, merchant: @merch1, created_at: "2019-03-06 21:29:54 UTC", updated_at: "2019-03-08 21:29:54 UTC")
+      @item4 = create(:item, merchant: @merch2, name: "Item")
+      @item5 = create(:item, merchant: @merch2, name: "Item")
+
+      get "/api/v1/items/find_all?id=#{@item3.id}"
+      expect(response).to be_successful
+      item = JSON.parse(response.body)
+      expect(item["data"].count).to eq(1)
+      expect(item["data"][0]["attributes"]["id"]).to eq(@item3.id)
+
+      get "/api/v1/items/find_all?name=#{@item4.name}"
+      expect(response).to be_successful
+      item = JSON.parse(response.body)
+      expect(item["data"].count).to eq(2)
+      expect(item["data"][0]["attributes"]["id"]).to eq(@item4.id)
+      expect(item["data"][1]["attributes"]["id"]).to eq(@item5.id)
+
+      get "/api/v1/items/find_all?created_at=#{@item1.created_at}"
+      expect(response).to be_successful
+      item = JSON.parse(response.body)
+      expect(item["data"].count).to eq(2)
+      expect(item["data"][0]["attributes"]["id"]).to eq(@item1.id)
+      expect(item["data"][1]["attributes"]["id"]).to eq(@item3.id)
+
+      get "/api/v1/items/find_all?updated_at=#{@item2.updated_at}"
+      expect(response).to be_successful
+      item = JSON.parse(response.body)
+      expect(item["data"].count).to eq(3)
+      expect(item["data"][0]["attributes"]["id"]).to eq(@item1.id)
+      expect(item["data"][1]["attributes"]["id"]).to eq(@item2.id)
+      expect(item["data"][2]["attributes"]["id"]).to eq(@item3.id)
     end
   end
 end
