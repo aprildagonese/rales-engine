@@ -98,7 +98,7 @@ RSpec.describe "Merchants API" do
 
   describe "Relationship Endpoints" do
     before :each do
-      @customer1 = create(:customer)
+      @customer = create(:customer)
       @merchant1 = create(:merchant)
       @merchant2 = create(:merchant)
       @item1 = create(:item, merchant: @merchant1)
