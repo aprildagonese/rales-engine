@@ -10,6 +10,13 @@ Rails.application.routes.draw do
       get 'items/most_revenue', to: 'items#show', as: :most_revenue
       get 'items/:id/invoice_items', to: 'item_invoice_items#index', as: :item_invoice_items
       get 'items/:id/merchant', to: 'item_merchants#show', as: :item_merchant
+
+      get 'customers/find_all', to: 'customers_find#index', as: :find_customers
+      get 'customers/find', to: 'customers_find#show', as: :find_customer
+      get 'customers/:id/invoices', to: 'customer_invoices#index', as: :customer_invoices
+      get 'customers/:id/transactions', to: 'customer_transactions#index', as: :customer_transactions
+      get 'customers', to: 'customers#index', as: :customers
+      get 'customers/:id', to: 'customers#show', as: :customer
     end
   end
 end
