@@ -8,6 +8,8 @@ Rails.application.routes.draw do
       get 'items/:id/', to: 'items#show', as: :item
       get 'items/most_items', to: 'items#show', as: :most_items
       get 'items/most_revenue', to: 'items#show', as: :most_revenue
+      get 'items/:id/invoice_items', to: 'item_invoice_items#index', as: :item_invoice_items
+      get 'items/:id/merchant', to: 'item_merchants#show', as: :item_merchant
     end
   end
 end
