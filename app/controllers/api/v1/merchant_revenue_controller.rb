@@ -2,7 +2,8 @@ class Api::V1::MerchantRevenueController < ApplicationController
   include ActionView::Helpers::NumberHelper
 
   def show
-    binding.pry
-    revenue = Invoice.revenue(params[:date])
+    date = params[:date].to_date
+    revenue = Revenue.new(number_to_currency(Invoice.revenue(date), unit: "").to_str)
+    render json: RevenueSerializer.new(revenue)
   end
 end

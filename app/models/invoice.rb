@@ -15,12 +15,10 @@ class Invoice < ApplicationRecord
   end
 
   def self.revenue(date)
-    x = Invoice.joins(:invoice_items, :transactions)
-        .select("invoices.created_at, sum(invoice_items.quantity*invoice_items.unit_price) AS days_revenue")
-        .group(:id)
+    Invoice.joins(:invoice_items, :transactions)
+        .select("sum(invoice_items.quantity*invoice_items.unit_price) AS days_revenue")
         .where(created_at: date.all_day)
-        .merge(Transaction.successful)
-        .first
+        .merge(Transaction.successful)[0]
         .days_revenue
   end
 end
