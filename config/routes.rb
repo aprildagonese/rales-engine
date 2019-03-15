@@ -23,6 +23,8 @@ Rails.application.routes.draw do
       get 'merchants/find', to: 'merchants_find#show', as: :find_merchant
       get 'merchants/:id/items', to: 'merchant_items#index', as: :merchant_items
       get 'merchants/:id/invoices', to: 'merchant_invoices#index', as: :merchant_invoices
+      get 'merchants/most_revenue', to: 'merchant_most_revenue#index', as: :merchant_most_revenue
+      get 'merchants/most_items', to: 'merchant_most_items#index', as: :merchant_most_items
       get 'merchants', to: 'merchants#index', as: :merchants
       get 'merchants/:id', to: 'merchants#show', as: :merchant
 

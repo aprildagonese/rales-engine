@@ -176,27 +176,33 @@ RSpec.describe "Merchants API" do
         @inv_item7 = create(:invoice_item, invoice: @invoice7, item: @item7, quantity: 8, unit_price: 8.00, created_at: "2019-03-07 21:29:54 UTC")
         @inv_item8 = create(:invoice_item, invoice: @invoice8, item: @item8, quantity: 1, unit_price: 1.00, created_at: "2019-03-07 21:29:54 UTC")
         @inv_item9 = create(:invoice_item, invoice: @invoice9, item: @item9, quantity: 3, unit_price: 3.00, created_at: "2019-03-07 21:29:54 UTC")
+        @transaction1 = create(:transaction, invoice: @invoice1, result: "success")
+        @transaction2 = create(:transaction, invoice: @invoice2, result: "success")
+        @transaction3 = create(:transaction, invoice: @invoice3, result: "failed")
+        @transaction4 = create(:transaction, invoice: @invoice4, result: "success")
+        @transaction5 = create(:transaction, invoice: @invoice5, result: "success")
+        @transaction6 = create(:transaction, invoice: @invoice6, result: "success")
+        @transaction7 = create(:transaction, invoice: @invoice7, result: "success")
+        @transaction8 = create(:transaction, invoice: @invoice8, result: "success")
+        @transaction9 = create(:transaction, invoice: @invoice9, result: "success")
       end
 
       it "returns X merchants ranked by revenue" do
         get '/api/v1/merchants/most_revenue?quantity=6'
         expect(response).to be_successful
-        items = JSON.parse(response.body)
-        expect(items["data"][0]["attributes"]["id"]).to eq(@item5.id)
-        expect(items["data"][1]["attributes"]["id"]).to eq(@item7.id)
-        expect(items["data"][2]["attributes"]["id"]).to eq(@item3.id)
-        expect(items["data"][3]["attributes"]["id"]).to eq(@item6.id)
-        expect(items["data"][4]["attributes"]["id"]).to eq(@item1.id)
-        expect(items["data"][5]["attributes"]["id"]).to eq(@item2.id)
+        merchants = JSON.parse(response.body)
+        expect(merchants["data"][0]["attributes"]["id"]).to eq(@merch2.id)
+        expect(merchants["data"][1]["attributes"]["id"]).to eq(@merch3.id)
+        expect(merchants["data"][2]["attributes"]["id"]).to eq(@merch1.id)
       end
 
-      xit "returns top X merchants ranked by number sold" do
+      it "returns top X merchants ranked by number sold" do
         get '/api/v1/merchants/most_items?quantity=3'
         expect(response).to be_successful
         merchants = JSON.parse(response.body)
         expect(merchants["data"][0]["attributes"]["id"]).to eq(@merch2.id)
-        expect(merchants["data"][1]["attributes"]["id"]).to eq(@merch1.id)
-        expect(merchants["data"][2]["attributes"]["id"]).to eq(@merch3.id)
+        expect(merchants["data"][1]["attributes"]["id"]).to eq(@merch3.id)
+        expect(merchants["data"][2]["attributes"]["id"]).to eq(@merch1.id)
       end
 
       xit "returns total revenue for date X across all merchants" do

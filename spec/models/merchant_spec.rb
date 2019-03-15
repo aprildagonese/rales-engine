@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe Merhcant, type: :model do
+RSpec.describe Merchant, type: :model do
   describe "Class Methods" do
     before :each do
       @merch1, @merch2, @merch3 = create_list(:merchant, 3)
-      @item1, @item2, @item3 = create_list(:item, 3, merchant: @merch1) - 16
-      @item4, @item5, @item6 = create_list(:item, 3, merchant: @merch2) - 17
-      @item7, @item8, @item9 = create_list(:item, 3, merchant: @merch3) - 12
+      @item1, @item2, @item3 = create_list(:item, 3, merchant: @merch1)
+      @item4, @item5, @item6 = create_list(:item, 3, merchant: @merch2)
+      @item7, @item8, @item9 = create_list(:item, 3, merchant: @merch3)
       @customer = create(:customer)
       @invoice1, @invoice2, @invoice3 = create_list(:invoice, 3, customer: @customer, merchant: @merch1)
       @invoice4, @invoice5, @invoice6 = create_list(:invoice, 3, customer: @customer, merchant: @merch2)
@@ -20,17 +20,25 @@ RSpec.describe Merhcant, type: :model do
       @inv_item7 = create(:invoice_item, invoice: @invoice7, item: @item7, quantity: 8, unit_price: 8.00, created_at: "2019-03-07 21:29:54 UTC")
       @inv_item8 = create(:invoice_item, invoice: @invoice8, item: @item8, quantity: 1, unit_price: 1.00, created_at: "2019-03-07 21:29:54 UTC")
       @inv_item9 = create(:invoice_item, invoice: @invoice9, item: @item9, quantity: 3, unit_price: 3.00, created_at: "2019-03-07 21:29:54 UTC")
+      @transaction1 = create(:transaction, invoice: @invoice1, result: "success")
+      @transaction2 = create(:transaction, invoice: @invoice2, result: "success")
+      @transaction3 = create(:transaction, invoice: @invoice3, result: "failed")
+      @transaction4 = create(:transaction, invoice: @invoice4, result: "success")
+      @transaction5 = create(:transaction, invoice: @invoice5, result: "success")
+      @transaction6 = create(:transaction, invoice: @invoice6, result: "success")
+      @transaction7 = create(:transaction, invoice: @invoice7, result: "success")
+      @transaction8 = create(:transaction, invoice: @invoice8, result: "success")
+      @transaction9 = create(:transaction, invoice: @invoice9, result: "success")
     end
 
     it ".most_revenue" do
-      merchants = [@merch2, @merch1, @merch3]
+      merchants = [@merch2, @merch3, @merch1]
       expect(Merchant.most_revenue).to eq(merchants)
     end
 
     it ".most_items" do
-      merchants = [@merch2, @merch1, @merch3]
+      merchants = [@merch2, @merch3, @merch1]
       expect(Merchant.most_items).to eq(merchants)
     end
-
-
   end
+end
