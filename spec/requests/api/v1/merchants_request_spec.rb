@@ -208,7 +208,7 @@ RSpec.describe "Merchants API" do
       xit "returns total revenue for date X across all merchants" do
         get "/api/v1/merchants/revenue?date=#{@inv_item1.created_at}"
         revenue = JSON.parse(response.body)
-        expect(revenue["data"]["attributes"]["total_revenue"]).to eq("94.00")
+        expect(revenue["data"]["attributes"]["total_revenue"]).to eq("45.00")
 
         get "/api/v1/merchants/revenue?date=#{@inv_item9.created_at}"
         revenue = JSON.parse(response.body)
