@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       get 'customers/find', to: 'customers_find#show', as: :find_customer
       get 'customers/:id/invoices', to: 'customer_invoices#index', as: :customer_invoices
       get 'customers/:id/transactions', to: 'customer_transactions#index', as: :customer_transactions
-      get 'customers/:id/favorite_merchant', to: 'customer_merchants#index', as: :customer_merchants
+      get 'customers/:id/favorite_merchant', to: 'customer_merchants#show', as: :customer_merchants
       get 'customers', to: 'customers#index', as: :customers
       get 'customers/:id', to: 'customers#show', as: :customer
 
@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       get 'merchants/revenue', to: 'merchant_revenue#index', as: :days_revenue
       get 'merchants/:id/revenue', to: 'merchant_revenue#show', as: :merchant_revenue
       get 'merchants/:id/favorite_customer', to: 'merchant_customers#show', as: :merchant_customers
+      get 'merchants/:id/customers_with_pending_invoices', to: 'merchant_customers#index', as: :merchant_customers_pending_invoices
       get 'merchants', to: 'merchants#index', as: :merchants
       get 'merchants/:id', to: 'merchants#show', as: :merchant
 
