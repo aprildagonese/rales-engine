@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       get 'merchants/most_items', to: 'merchant_most_items#index', as: :merchant_most_items
       get 'merchants/revenue', to: 'merchant_revenue#index', as: :days_revenue
       get 'merchants/:id/revenue', to: 'merchant_revenue#show', as: :merchant_revenue
+      get 'merchants/:id/favorite_customer', to: 'merchant_customers#show', as: :merchant_customers
       get 'merchants', to: 'merchants#index', as: :merchants
       get 'merchants/:id', to: 'merchants#show', as: :merchant
 

@@ -227,15 +227,15 @@ RSpec.describe "Merchants API" do
         @item4, @item5, @item6 = create_list(:item, 3, merchant: @merch1)
         @item7, @item8, @item9, @item10 = create_list(:item, 4, merchant: @merch2)
         @item11, @item12, @item13 = create_list(:item, 3, merchant: @merch3)
-        @customer = create(:customer)
-        @invoice1, @invoice2, @invoice3 = create_list(:invoice, 3, customer: @customer, merchant: @merch1, created_at: "2019-03-06 21:29:54 UTC")
-        @invoice4, @invoice5 = create_list(:invoice, 2, customer: @customer, merchant: @merch1, created_at: "2019-03-07 21:29:54 UTC")
-        @invoice6 = create(:invoice, customer: @customer, merchant: @merch1, created_at: "2019-03-08 21:29:54 UTC")
-        @invoice7, @invoice8 = create_list(:invoice, 2, customer: @customer, merchant: @merch2, created_at: "2019-03-08 21:29:54 UTC")
-        @invoice9 = create(:invoice, customer: @customer, merchant: @merch2, created_at: "2019-03-09 21:29:54 UTC")
-        @invoice10 = create(:invoice, customer: @customer, merchant: @merch2, created_at: "2019-03-10 21:29:54 UTC")
-        @invoice11, @invoice12 = create_list(:invoice, 2, customer: @customer, merchant: @merch3, created_at: "2019-03-08 21:29:54 UTC")
-        @invoice13 = create(:invoice, customer: @customer, merchant: @merch3, created_at: "2019-03-09 21:29:54 UTC")
+        @customer1, @customer2, @customer3 = create_list(:customer, 3)
+        @invoice1, @invoice2, @invoice3 = create_list(:invoice, 3, customer: @customer2, merchant: @merch1, created_at: "2019-03-06 21:29:54 UTC")
+        @invoice4, @invoice5 = create_list(:invoice, 2, customer: @customer2, merchant: @merch1, created_at: "2019-03-07 21:29:54 UTC")
+        @invoice6 = create(:invoice, customer: @customer2, merchant: @merch1, created_at: "2019-03-08 21:29:54 UTC")
+        @invoice7, @invoice8 = create_list(:invoice, 2, customer: @customer2, merchant: @merch2, created_at: "2019-03-08 21:29:54 UTC")
+        @invoice9 = create(:invoice, customer: @customer3, merchant: @merch2, created_at: "2019-03-09 21:29:54 UTC")
+        @invoice10 = create(:invoice, customer: @customer3, merchant: @merch2, created_at: "2019-03-10 21:29:54 UTC")
+        @invoice13 = create(:invoice, customer: @customer2, merchant: @merch3, created_at: "2019-03-09 21:29:54 UTC")
+        @invoice11, @invoice12 = create_list(:invoice, 2, customer: @customer1, merchant: @merch3, created_at: "2019-03-08 21:29:54 UTC")
         @inv_item1 = create(:invoice_item, invoice: @invoice1, item: @item1, quantity: 5, unit_price: 5.00, created_at: "2019-03-06 21:29:54 UTC")
         @inv_item2 = create(:invoice_item, invoice: @invoice2, item: @item2, quantity: 4, unit_price: 4.00, created_at: "2019-03-06 21:29:54 UTC")
         @inv_item3 = create(:invoice_item, invoice: @invoice3, item: @item3, quantity: 7, unit_price: 7.00, created_at: "2019-03-06 21:29:54 UTC")
@@ -276,7 +276,10 @@ RSpec.describe "Merchants API" do
         expect(revenue["data"]["attributes"]["total_revenue"]).to eq("85.00")
       end
 
-      xit "returns customer with most successful transactions" do
+      it "returns customer with most successful transactions" do
+        get "/api/v1/merchants/#{@merch1.id}/favorite_customer"
+        customer = JSON.parse(response.body)
+        expect(customer["data"]["attributes"]["id"]).to eq(@customer2.id)
       end
 
       xit "returns customers with any unsuccessful transactions" do

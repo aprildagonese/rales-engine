@@ -3,6 +3,7 @@ class Merchant < ApplicationRecord
   has_many :invoices
   has_many :transactions, through: :invoices
   has_many :invoice_items, through: :invoices
+  has_many :customers, through: :invoices
 
   def self.most_revenue(limit = 5)
     Merchant.joins(invoices: [:invoice_items, :transactions])
@@ -35,5 +36,14 @@ class Merchant < ApplicationRecord
         .where(created_at: date.all_day)
         .merge(Transaction.successful)[0]
         .days_revenue
+  end
+
+  def favorite_customer
+    Customer.joins(invoices: :transactions)
+            .select("customers.*, count(transactions.id) AS transaction_count")
+            .group(:id)
+            .merge(Transaction.successful)
+            .where(invoices: {merchant_id: self.id})
+            .order("transaction_count DESC")[0]
   end
 end
