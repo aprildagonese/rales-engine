@@ -14,7 +14,7 @@
         null,
         null,
         null,
-        1,
+        0,
         null,
         null,
         1,
@@ -23,6 +23,13 @@
         null,
         null,
         null,
+        0,
+        null,
+        null,
+        1,
+        null,
+        null,
+        null,
         1,
         null,
         null,
@@ -30,15 +37,8 @@
         null,
         null,
         null,
-        3,
-        null,
         null,
         1,
-        null,
-        null,
-        null,
-        null,
-        4,
         null,
         null
       ],
@@ -139,20 +139,56 @@
         1,
         1,
         null,
-        10,
+        3,
         null
       ],
-      "/Users/aprildagonese/Turing/3module/projects/rales_engine/app/mailers/application_mailer.rb": [
+      "/Users/aprildagonese/Turing/3module/projects/rales_engine/app/controllers/api/v1/merchant_revenue_controller.rb": [
+        1,
+        1,
+        null,
+        1,
         0,
-        0,
-        0,
-        0
-      ],
-      "/Users/aprildagonese/Turing/3module/projects/rales_engine/app/models/revenue.rb": [
         0,
         0,
         null,
-        0,
+        null,
+        1,
+        2,
+        1,
+        1,
+        1,
+        1,
+        null,
+        1,
+        1,
+        1,
+        null,
+        null,
+        null
+      ],
+      "/Users/aprildagonese/Turing/3module/projects/rales_engine/app/controllers/application_controller.rb": [
+        1,
+        null
+      ],
+      "/Users/aprildagonese/Turing/3module/projects/rales_engine/app/models/revenue.rb": [
+        1,
+        1,
+        null,
+        1,
+        2,
+        2,
+        null,
+        null
+      ],
+      "/Users/aprildagonese/Turing/3module/projects/rales_engine/app/serializers/revenue_serializer.rb": [
+        1,
+        1,
+        1,
+        1,
+        null,
+        null
+      ],
+      "/Users/aprildagonese/Turing/3module/projects/rales_engine/app/mailers/application_mailer.rb": [
         0,
         0,
         0,
@@ -168,14 +204,6 @@
         0,
         0,
         0,
-        0
-      ],
-      "/Users/aprildagonese/Turing/3module/projects/rales_engine/app/serializers/revenue_serializer.rb": [
-        0,
-        0,
-        0,
-        0,
-        null,
         0
       ],
       "/Users/aprildagonese/Turing/3module/projects/rales_engine/app/serializers/transaction_serializer.rb": [
@@ -209,10 +237,6 @@
         0
       ],
       "/Users/aprildagonese/Turing/3module/projects/rales_engine/app/jobs/application_job.rb": [
-        0,
-        0
-      ],
-      "/Users/aprildagonese/Turing/3module/projects/rales_engine/app/controllers/application_controller.rb": [
         0,
         0
       ],
@@ -327,23 +351,6 @@
       ],
       "/Users/aprildagonese/Turing/3module/projects/rales_engine/app/controllers/api/v1/customer_invoices_controller.rb": [
         0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      "/Users/aprildagonese/Turing/3module/projects/rales_engine/app/controllers/api/v1/merchant_revenue_controller.rb": [
-        0,
-        0,
-        null,
-        0,
-        0,
-        0,
-        0,
-        0,
-        null,
         0,
         0,
         0,
@@ -476,6 +483,6 @@
         0
       ]
     },
-    "timestamp": 1552753551
+    "timestamp": 1552756507
   }
 }
