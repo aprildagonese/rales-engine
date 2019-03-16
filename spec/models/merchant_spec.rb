@@ -16,6 +16,8 @@ RSpec.describe Merchant, type: :model do
     @invoice10 = create(:invoice, customer: @customer3, merchant: @merch2, created_at: "2019-03-10 21:29:54 UTC")
     @invoice13 = create(:invoice, customer: @customer2, merchant: @merch3, created_at: "2019-03-09 21:29:54 UTC")
     @invoice11, @invoice12 = create_list(:invoice, 2, customer: @customer1, merchant: @merch3, created_at: "2019-03-08 21:29:54 UTC")
+    @invoice14 = create(:invoice, customer: @customer1, merchant: @merch1, created_at: "2019-03-09 21:29:54 UTC")
+    @invoice15 = create(:invoice, customer: @customer3, merchant: @merch2, created_at: "2019-03-09 21:29:54 UTC")
     @inv_item1 = create(:invoice_item, invoice: @invoice1, item: @item1, quantity: 5, unit_price: 5.00, created_at: "2019-03-06 21:29:54 UTC")
     @inv_item2 = create(:invoice_item, invoice: @invoice2, item: @item2, quantity: 4, unit_price: 4.00, created_at: "2019-03-06 21:29:54 UTC")
     @inv_item3 = create(:invoice_item, invoice: @invoice3, item: @item3, quantity: 7, unit_price: 7.00, created_at: "2019-03-06 21:29:54 UTC")
@@ -29,6 +31,8 @@ RSpec.describe Merchant, type: :model do
     @inv_item11 = create(:invoice_item, invoice: @invoice11, item: @item11, quantity: 1, unit_price: 10.00, created_at: "2019-03-08 21:29:54 UTC")
     @inv_item12 = create(:invoice_item, invoice: @invoice12, item: @item12, quantity: 1, unit_price: 10.00, created_at: "2019-03-08 21:29:54 UTC")
     @inv_item13 = create(:invoice_item, invoice: @invoice13, item: @item12, quantity: 1, unit_price: 10.00, created_at: "2019-03-09 21:29:54 UTC")
+    @inv_item14 = create(:invoice_item, invoice: @invoice14, item: @item1, quantity: 0, unit_price: 10.00, created_at: "2019-03-09 21:29:54 UTC")
+    @inv_item15 = create(:invoice_item, invoice: @invoice15, item: @item8, quantity: 0, unit_price: 10.00, created_at: "2019-03-09 21:29:54 UTC")
     @transaction1 = create(:transaction, invoice: @invoice1, result: "success")
     @transaction2 = create(:transaction, invoice: @invoice2, result: "success")
     @transaction3 = create(:transaction, invoice: @invoice3, result: "failed")
@@ -42,6 +46,8 @@ RSpec.describe Merchant, type: :model do
     @transaction11 = create(:transaction, invoice: @invoice11, result: "success")
     @transaction12 = create(:transaction, invoice: @invoice12, result: "success")
     @transaction13 = create(:transaction, invoice: @invoice13, result: "success")
+    @transaction14 = create(:transaction, invoice: @invoice14, result: "failed")
+    @transaction15 = create(:transaction, invoice: @invoice15, result: "failed")
   end
 
   describe "Class Methods" do
@@ -74,6 +80,12 @@ RSpec.describe Merchant, type: :model do
       expect(@merch1.favorite_customer).to eq(@customer2)
       expect(@merch2.favorite_customer).to eq(@customer3)
       expect(@merch3.favorite_customer).to eq(@customer1)
+    end
+
+    it "#customers_with_pending_invoices" do
+      expect(@merch1.customers_with_pending_invoices).to eq([@customer1, @customer2])
+      expect(@merch2.customers_with_pending_invoices).to eq([@customer2, @customer3])
+      expect(@merch3.customers_with_pending_invoices).to eq([])
     end
   end
 end

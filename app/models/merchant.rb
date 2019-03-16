@@ -46,4 +46,11 @@ class Merchant < ApplicationRecord
             .where(invoices: {merchant_id: self.id})
             .order("transaction_count DESC")[0]
   end
+
+  def customers_with_pending_invoices
+    Customer.joins(invoices: :transactions)
+            .where.not(transactions: {result: "success"})
+            .where(invoices: {merchant_id: self.id})
+            .order(:id)
+  end
 end
