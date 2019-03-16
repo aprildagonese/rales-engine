@@ -72,7 +72,7 @@ RSpec.describe "Merchants API" do
       expect(merchant["data"].count).to eq(1)
       expect(merchant["data"][0]["attributes"]["id"]).to eq(@merchant3.id)
 
-      get "/api/v1/merchants/find_all?name=#{@merchant4.name}"
+      get "/api/v1/merchants/find_all?name=merchant"
       expect(response).to be_successful
       merchant = JSON.parse(response.body)
       expect(merchant["data"].count).to eq(2)
@@ -206,13 +206,31 @@ RSpec.describe "Merchants API" do
       end
 
       it "returns total revenue for date X across all merchants" do
-        get "/api/v1/merchants/revenue?date=#{@invoice1.created_at}"
+        get "/api/v1/merchants/revenue?date=2019-03-06"
         revenue = JSON.parse(response.body)
         expect(revenue["data"]["attributes"]["total_revenue"]).to eq("162.00")
 
-        get "/api/v1/merchants/revenue?date=#{@invoice9.created_at}"
+        get "/api/v1/merchants/revenue?date=2019-03-08"
         revenue = JSON.parse(response.body)
         expect(revenue["data"]["attributes"]["total_revenue"]).to eq("74.00")
+      end
+    end
+
+    describe "Single Merchants" do
+      it "returns total revenue for that merchant" do
+        expect(Merchant).to_receive(:total_revenue).with(id: 5).once.and_return("120.00")
+        get '/api/v1/merchants/5/revenue'
+        revenue = JSON.parse(response.body)
+        expect(revenue["data"]["attributes"]["total_revenue"]).to eq("120.00")
+      end
+
+      it "returns total revenue for specific date" do
+      end
+
+      it "returns customer with most successful transactions" do
+      end
+
+      it "returns customers with any unsuccessful transactions" do
       end
     end
   end
