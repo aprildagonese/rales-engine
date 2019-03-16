@@ -40,7 +40,11 @@ Rails.application.routes.draw do
 
       get 'invoices/find_all', to: 'invoices_find#index', as: :find_invoices
       get 'invoices/find', to: 'invoices_find#show', as: :find_invoice
-      get 'invoices/:id/invoice', to: 'invoice_invoice#show', as: :invoice_invoice
+      get 'invoices/:id/transactions', to: 'invoice_transactions#index', as: :invoice_transactions
+      get 'invoices/:id/invoice_items', to: 'invoice_invoice_items#index', as: :invoice_invoice_items
+      get 'invoices/:id/items', to: 'invoice_items#index', as: :invoice_items
+      get 'invoices/:id/customer', to: 'invoice_customer#show', as: :invoice_customer
+      get 'invoices/:id/merchant', to: 'invoice_merchant#show', as: :invoice_merchant
       get 'invoices', to: 'invoices#index', as: :invoices
       get 'invoices/:id', to: 'invoices#show', as: :invoice
 
