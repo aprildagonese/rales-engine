@@ -30,8 +30,8 @@ RSpec.describe Invoice, type: :model do
       @transaction8 = create(:transaction, invoice: @invoice8, result: "success")
       @transaction9 = create(:transaction, invoice: @invoice9, result: "success")
 
-      expect(Invoice.revenue(@invoice4.created_at).to_f).to eq(162.0)
-      expect(Invoice.revenue(@invoice7.created_at).to_f).to eq(74.0)
+      expect(Invoice.revenue_by_date(@invoice4.created_at).to_f).to eq(162.0)
+      expect(Invoice.revenue_by_date(@invoice7.created_at).to_f).to eq(74.0)
     end
   end
 end

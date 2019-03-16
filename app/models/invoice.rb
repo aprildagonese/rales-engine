@@ -14,7 +14,7 @@ class Invoice < ApplicationRecord
            .limit(5)
   end
 
-  def self.revenue(date)
+  def self.revenue_by_date(date)
     Invoice.joins(:invoice_items, :transactions)
         .select("sum(invoice_items.quantity*invoice_items.unit_price) AS days_revenue")
         .where(created_at: date.all_day)

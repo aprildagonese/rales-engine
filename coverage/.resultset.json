@@ -6,6 +6,7 @@
         1,
         1,
         1,
+        1,
         null,
         1,
         null,
@@ -23,6 +24,21 @@
         null,
         null,
         1,
+        null,
+        null,
+        1,
+        null,
+        null,
+        null,
+        3,
+        null,
+        null,
+        1,
+        null,
+        null,
+        null,
+        null,
+        4,
         null,
         null
       ],
@@ -113,6 +129,7 @@
         1,
         1,
         1,
+        1,
         null,
         null
       ],
@@ -122,7 +139,7 @@
         1,
         1,
         null,
-        3,
+        10,
         null
       ],
       "/Users/aprildagonese/Turing/3module/projects/rales_engine/app/mailers/application_mailer.rb": [
@@ -459,6 +476,6 @@
         0
       ]
     },
-    "timestamp": 1552698262
+    "timestamp": 1552753551
   }
 }
