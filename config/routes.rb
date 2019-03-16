@@ -38,6 +38,12 @@ Rails.application.routes.draw do
       get 'transactions', to: 'transactions#index', as: :transactions
       get 'transactions/:id', to: 'transactions#show', as: :transaction
 
+      get 'invoices/find_all', to: 'invoices_find#index', as: :find_invoices
+      get 'invoices/find', to: 'invoices_find#show', as: :find_invoice
+      get 'invoices/:id/invoice', to: 'invoice_invoice#show', as: :invoice_invoice
+      get 'invoices', to: 'invoices#index', as: :invoices
+      get 'invoices/:id', to: 'invoices#show', as: :invoice
+
     end
   end
 end
