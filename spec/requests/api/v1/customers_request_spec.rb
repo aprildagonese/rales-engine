@@ -21,6 +21,7 @@ RSpec.describe "Customers API" do
     end
 
     it "returns all customers" do
+      binding.pry
       get "/api/v1/customers"
       expect(response).to be_successful
       customers = JSON.parse(response.body)

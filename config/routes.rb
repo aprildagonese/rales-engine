@@ -32,6 +32,12 @@ Rails.application.routes.draw do
       get 'merchants', to: 'merchants#index', as: :merchants
       get 'merchants/:id', to: 'merchants#show', as: :merchant
 
+      get 'transactions/find_all', to: 'transactions_find#index', as: :find_transactions
+      get 'transactions/find', to: 'transactions_find#show', as: :find_transaction
+      get 'transactions/:id/invoice', to: 'transaction_invoice#show', as: :transaction_invoice
+      get 'transactions', to: 'transactions#index', as: :transactions
+      get 'transactions/:id', to: 'transactions#show', as: :transaction
+
     end
   end
 end
