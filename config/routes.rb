@@ -48,12 +48,12 @@ Rails.application.routes.draw do
       get 'invoices', to: 'invoices#index', as: :invoices
       get 'invoices/:id', to: 'invoices#show', as: :invoice
 
-      get 'invoiceitems/find_all', to: 'invoiceitems_find#index', as: :find_invoiceitems
-      get 'invoiceitems/find', to: 'invoiceitems_find#show', as: :find_invoiceitem
-      get 'invoiceitems/:id/invoice', to: 'invoiceitems_invoice#show', as: :invoiceitem_invoice
-      get 'invoiceitems/:id/item', to: 'invoiceitems_item#show', as: :invoiceitem_item
-      get 'invoiceitems', to: 'invoiceitems#index', as: :invoiceitems
-      get 'invoiceitems/:id', to: 'invoiceitems#show', as: :invoiceitem
+      get 'invoice_items/find_all', to: 'invoiceitems_find#index', as: :find_invoiceitems
+      get 'invoice_items/find', to: 'invoiceitems_find#show', as: :find_invoiceitem
+      get 'invoice_items/:id/invoice', to: 'invoiceitems_invoice#show', as: :invoiceitem_invoice
+      get 'invoice_items/:id/item', to: 'invoiceitems_item#show', as: :invoiceitem_item
+      get 'invoice_items', to: 'invoiceitems#index', as: :invoiceitems
+      get 'invoice_items/:id', to: 'invoiceitems#show', as: :invoiceitem
 
     end
   end

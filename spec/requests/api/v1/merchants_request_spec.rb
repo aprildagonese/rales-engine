@@ -277,7 +277,7 @@ RSpec.describe "Merchants API" do
       end
 
       it "returns total revenue for specific date" do
-        get "/api/v1/merchants/#{@merch1.id}/revenue?date=2019-03-07"
+        get "/api/v1/merchants/#{@merch1.id}/revenue?date='2019-03-07'"
         revenue = JSON.parse(response.body)
         expect(revenue["data"]["attributes"]["total_revenue"]).to eq("85.00")
       end
