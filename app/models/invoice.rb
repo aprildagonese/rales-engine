@@ -11,7 +11,6 @@ class Invoice < ApplicationRecord
            .group(:id)
            .where(transactions: {result: "success"})
            .order("revenue DESC")
-           .limit(5)
   end
 
   def self.all_revenue_by_date(date)

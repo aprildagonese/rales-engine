@@ -56,8 +56,9 @@ RSpec.describe Merchant, type: :model do
 
   describe "Class Methods" do
     it ".most_revenue" do
-      merchants = [@merch1, @merch3, @merch2]
-      expect(Merchant.most_revenue).to eq(merchants)
+      expect(Merchant.most_revenue[0]).to eq(@merch1)
+      expect(Merchant.most_revenue[1]).to eq(@merch3)
+      expect(Merchant.most_revenue[2]).to eq(@merch2)
     end
 
     it ".most_items" do
