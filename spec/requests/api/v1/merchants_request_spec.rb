@@ -208,11 +208,11 @@ RSpec.describe "Merchants API" do
       it "returns total revenue for date X across all merchants" do
         get "/api/v1/merchants/revenue?date=2019-03-06"
         revenue = JSON.parse(response.body)
-        expect(revenue["data"]["attributes"]["total_revenue"]).to eq("162.00")
+        expect(revenue["data"]["attributes"]["total_revenue"]).to eq("1.62")
 
         get "/api/v1/merchants/revenue?date=2019-03-08"
         revenue = JSON.parse(response.body)
-        expect(revenue["data"]["attributes"]["total_revenue"]).to eq("74.00")
+        expect(revenue["data"]["attributes"]["total_revenue"]).to eq("0.74")
       end
     end
 
@@ -273,13 +273,13 @@ RSpec.describe "Merchants API" do
       it "returns total revenue for that merchant" do
         get "/api/v1/merchants/#{@merch1.id}/revenue"
         revenue = JSON.parse(response.body)
-        expect(revenue["data"]["attributes"]["total_revenue"]).to eq("162.00")
+        expect(revenue["data"]["attributes"]["revenue"]).to eq("1.62")
       end
 
       it "returns total revenue for specific date" do
         get "/api/v1/merchants/#{@merch1.id}/revenue?date='2019-03-07'"
         revenue = JSON.parse(response.body)
-        expect(revenue["data"]["attributes"]["total_revenue"]).to eq("85.00")
+        expect(revenue["data"]["attributes"]["revenue"]).to eq("0.85")
       end
 
       it "returns customer with most successful transactions" do

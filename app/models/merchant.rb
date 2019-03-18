@@ -49,9 +49,14 @@ class Merchant < ApplicationRecord
   end
 
   def customers_with_pending_invoices
-    Customer.joins(invoices: :transactions)
-            .where.not(transactions: {result: "success"})
+    successful_invoices = Invoice.joins(:transactions)
+        .merge(Transaction.successful)
+        .where(merchant_id: self.id)
+
+    Customer.joins(:invoices)
+            .where.not(invoices: {id: successful_invoices})
             .where(invoices: {merchant_id: self.id})
             .order(:id)
+            .distinct
   end
 end

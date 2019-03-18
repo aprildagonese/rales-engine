@@ -192,24 +192,34 @@ RSpec.describe "Items API" do
     it "returns day of most sales for given item" do
       @item7 = create(:item, merchant: @merch1)
       @item8 = create(:item, merchant: @merch2)
-      @invoice3, @invoice4, @invoice5 = create_list(:invoice, 3, merchant: @merch1, customer: @customer)
-      @invoice6, @invoice7, @invoice8 = create_list(:invoice, 3, merchant: @merch1, customer: @customer)
+      @invoice3 = create(:invoice, merchant: @merch1, customer: @customer, created_at: "2019-03-06T21:29:54.643Z")
+      @invoice4 = create(:invoice, merchant: @merch1, customer: @customer, created_at: "2019-03-08T21:29:54.643Z")
+      @invoice5 = create(:invoice, merchant: @merch1, customer: @customer, created_at: "2019-03-09T21:29:54.643Z")
+      @invoice6 = create(:invoice, merchant: @merch1, customer: @customer, created_at: "2019-03-07T21:29:54.643Z")
+      @invoice7 = create(:invoice, merchant: @merch1, customer: @customer, created_at: "2019-03-07T21:29:54.643Z")
+      @invoice8 = create(:invoice, merchant: @merch1, customer: @customer, created_at: "2019-03-08T21:29:54.643Z")
       @inv_item6 = create(:invoice_item, invoice: @invoice3, item: @item7, quantity: 5, created_at: "2019-03-06T21:29:54.643Z")
       @inv_item7 = create(:invoice_item, invoice: @invoice4, item: @item7, quantity: 1, created_at: "2019-03-08T21:29:54.643Z")
       @inv_item8 = create(:invoice_item, invoice: @invoice5, item: @item7, quantity: 1, created_at: "2019-03-09T21:29:54.643Z")
       @inv_item9 = create(:invoice_item, invoice: @invoice6, item: @item8, quantity: 1, created_at: "2019-03-07T21:29:54.643Z")
       @inv_item10 = create(:invoice_item, invoice: @invoice7, item: @item8, quantity: 1, created_at: "2019-03-07T21:29:54.643Z")
       @inv_item11 = create(:invoice_item, invoice: @invoice8, item: @item8, quantity: 1, created_at: "2019-03-08T21:29:54.643Z")
+      @transaction1 = create(:transaction, invoice: @invoice3, result: "success")
+      @transaction2 = create(:transaction, invoice: @invoice4, result: "success")
+      @transaction3 = create(:transaction, invoice: @invoice5, result: "success")
+      @transaction4 = create(:transaction, invoice: @invoice6, result: "success")
+      @transaction5 = create(:transaction, invoice: @invoice7, result: "success")
+      @transaction6 = create(:transaction, invoice: @invoice8, result: "success")
 
       get "/api/v1/items/#{@item7.id}/best_day"
       expect(response).to be_successful
       date = JSON.parse(response.body)
-      expect(date["data"]["attributes"]["created_at"]).to eq("2019-03-06T21:29:54.643Z")
+      expect(date["data"]["attributes"]["best_day"]).to eq("2019-03-06")
 
       get "/api/v1/items/#{@item8.id}/best_day"
       expect(response).to be_successful
       date = JSON.parse(response.body)
-      expect(date["data"]["attributes"]["created_at"]).to eq("2019-03-07T21:29:54.643Z")
+      expect(date["data"]["attributes"]["best_day"]).to eq("2019-03-07")
     end
   end
 

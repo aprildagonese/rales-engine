@@ -10,7 +10,8 @@ class Api::V1::InvoiceitemsFindController < ApplicationController
     elsif params[:quantity]
       @invoiceitems = InvoiceItem.where(quantity: params[:quantity])
     elsif params[:unit_price]
-      @invoiceitems = InvoiceItem.where(unit_price: params[:unit_price])
+      unit_price = ((params[:unit_price].to_f*100).round).to_s
+      @invoiceitems = InvoiceItem.where(unit_price: unit_price)
     elsif params[:created_at]
       @invoiceitems = InvoiceItem.where(created_at: params[:created_at])
     elsif params[:updated_at]
@@ -29,7 +30,8 @@ class Api::V1::InvoiceitemsFindController < ApplicationController
     elsif params[:quantity]
       @invoiceitem = InvoiceItem.find_by(quantity: params[:quantity])
     elsif params[:unit_price]
-      @invoiceitem = InvoiceItem.find_by(unit_price: params[:unit_price])
+      unit_price = ((params[:unit_price].to_f*100).round).to_s
+      @invoiceitem = InvoiceItem.find_by(unit_price: unit_price)
     elsif params[:created_at]
       @invoiceitem = InvoiceItem.find_by(created_at: params[:created_at])
     elsif params[:updated_at]
